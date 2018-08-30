@@ -8,6 +8,9 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 import java.sql.Time;
+import java.text.DateFormat;
+import java.text.FieldPosition;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.*;
 import java.util.Collections;
@@ -32,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     int currentIndex = 0;
+    int nextIndex = 0;
+    Date transition;
     ArrayList<ScheduleEvents> scheduleEvents = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,12 +77,33 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println(scheduleEvents.get(i).eventName);
             }
     }
-
-    void RunScheduler()
+    int FindPlaceInSchedule()
     {
-        final Handler handler = new Handler();
-        final int delay = 1000;
+        int tempIndex = -1;
+        Date currentTime = Calendar.getInstance().getTime();
+        for(int i = 0; i < scheduleEvents.size(); i++)
+        {
+            //If the current time is after the time on the Schedule
+            if(currentTime.after(scheduleEvents.get(i).eventTime))
+            {
+                //If the event at index: i is the not the last event on the schedule
+                if(i != scheduleEvents.size()-1)
+                {
+                    //If the current time is before the next event's time on the Schedule
+                   if(currentTime.before(scheduleEvents.get(i + 1).eventTime))
+                   {
+                       tempIndex = i;
+                       break;
+                   }
+                }
+            }
 
+        }
+        return tempIndex;
+
+    }
+    void ConvertScheduleToToday()
+    {
         //Setting every scheduled Event day to be the current day
         for(int i = 0; i < scheduleEvents.size(); i++)
         {
@@ -87,53 +113,49 @@ public class MainActivity extends AppCompatActivity {
             cal.set(Calendar.SECOND, scheduleEvents.get(i).eventTime.getSeconds());
             scheduleEvents.get(i).eventTime = cal.getTime();
         }
+    }
+    // TODO: Display a pop up that it's time to start transitioning to the next activity
+    void NotifyOfTransition()
+    {
+
+    }
+    Date GetTimeForNextTransition(int index)
+    {
+        Date transitionReturn;
+        transitionReturn = scheduleEvents.get(index).eventTime;
+        transitionReturn.setTime(transitionReturn.getTime() - (scheduleEvents.get(index).timeForReminder  * 1000 /*Converts the time to milliseconds*/));
+        return transitionReturn;
+    }
+    void RunScheduler()
+    {
+        final Handler handler = new Handler();
+        final int delay = 1000; //1 Second
+        currentIndex = FindPlaceInSchedule();
+        ConvertScheduleToToday();
+        nextIndex = (currentIndex != scheduleEvents.size() - 1)? currentIndex + 1 : 0;
+        transition = GetTimeForNextTransition(nextIndex);
 
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Calendar calendar = Calendar.getInstance();
+                Calendar thisSecond = Calendar.getInstance();
 
                 //Schedule Code
-                //Creating a time that is the set number of minutes before the next activity, called transitionTime
-                int nextIndex;
-                Date transitionTime = new Date();
-                if(scheduleEvents.size() > 0 && currentIndex == scheduleEvents.size() - 1)
-                {
-                    transitionTime = scheduleEvents.get(0).eventTime;
-                    transitionTime.setHours(transitionTime.getHours() - scheduleEvents.get(0).timeForReminder);
-                    nextIndex = 0;
-                }
-                else
-                {
-                    transitionTime = scheduleEvents.get(currentIndex + 1).eventTime;
-                    transitionTime.setHours(transitionTime.getHours() - scheduleEvents.get(currentIndex + 1).timeForReminder);
-                    nextIndex = currentIndex + 1;
-                }
-                System.out.println();
-                //If the current time is after the next events time
-                if(calendar.getTime().after(scheduleEvents.get(currentIndex).eventTime))
-                {
-                    //If the current time is still before the transition period
-                    if(calendar.getTime().before((transitionTime)))
-                    {
-                        TextView tempText = findViewById(R.id.currentActivity);
-                        tempText.setText("Current activity: " + scheduleEvents.get(currentIndex).eventName);
-                    }
-                    //If we are in the transition period
-                    else if(calendar.getTime().before(scheduleEvents.get(nextIndex).eventTime))
-                    {
-                        TextView tempText = findViewById(R.id.currentActivity);
-                        tempText.setText("Transitioning to:  " + scheduleEvents.get(nextIndex).eventName);
-                    }
-                    //We move on to the next event
-                    else
-                    {
-                        currentIndex = nextIndex;
-                    }
-                }
-                TextView tempText = findViewById(R.id.nextActivity);
-                tempText.setText("Next activity: " + scheduleEvents.get(nextIndex).eventName);
+                TextView current = findViewById(R.id.currentActivity);
+                current.setText("Current Activity; " + scheduleEvents.get(currentIndex).eventName);
+                TextView next = findViewById(R.id.nextActivity);
+                SimpleDateFormat transitionFormatted = new SimpleDateFormat("hh:mm a");
+                String transitionString = "";
+                transitionString = transitionFormatted.format(transition);
+                next.setText("Next Activity: " + scheduleEvents.get(nextIndex).eventName + "(" + transitionString + ")");
 
+                if(thisSecond.after(transition))
+                {
+                    NotifyOfTransition();
+                    currentIndex = (currentIndex + 1 == scheduleEvents.size())? 0:currentIndex +1;
+                    nextIndex = (currentIndex + 1 == scheduleEvents.size()) ? 0: currentIndex +1;
+                    transition = GetTimeForNextTransition(nextIndex);
+                }
                 handler.postDelayed(this, delay);
             }
         }, delay);
