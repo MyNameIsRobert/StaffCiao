@@ -20,11 +20,96 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    public class ScheduleOptions
+    {
+
+    }
+
+    public class MedicalInformation
+    {
+        public String medicationInfo;
+        public Date whenToTake;
+        int severityLevel;
+
+        public MedicalInformation(String medInfo, Date when)
+        {
+            medicationInfo = medInfo;
+            whenToTake = when;
+        }
+
+        public void setSeverityLevel(int severityLevel)
+        {
+            this.severityLevel = severityLevel;
+        }
+    }
+
+    public class Camper
+    {
+        public String camperName;
+        public int age;
+        public String courseName;
+        public String camperNickName;
+        public MedicalInformation[] medicalInformations;
+        public String tShirtSize;
+        public boolean baggedLunch;
+        public boolean isOvernight;
+        public char maleOrFemale;
+
+        public Camper()
+        {
+            camperName = "Johnny Doey";
+            age = 10;
+            courseName = "Roblox";
+            camperNickName = "John";
+            medicalInformations = null;
+            tShirtSize = "Adult Small";
+            baggedLunch = false;
+            isOvernight = true;
+            maleOrFemale = 'M';
+        }
+
+        public Camper(String name, int a, String cName, String nickName, MedicalInformation[] medInfo, String tShirt, boolean bag, boolean over, char mOrF)
+        {
+            camperNickName = name;
+            age = a;
+            courseName = cName;
+            camperNickName = nickName;
+            medicalInformations = medInfo;
+            tShirtSize = tShirt;
+            baggedLunch = bag;
+            isOvernight = over;
+            if(mOrF != 'F' && mOrF != 'f' && mOrF != 'M' && mOrF != 'm')
+            {
+                mOrF = 'M';
+            }
+            maleOrFemale = mOrF;
+        }
+
+        public void RandomizeCamper()
+        {
+            Random rand = new Random();
+            age = rand.nextInt(10);
+            age += 7;
+            maleOrFemale = (rand.nextInt(1) == 1)? 'M':'F';
+            if(maleOrFemale == 'M')
+                camperName = "Johnny Doey";
+            else
+                camperName = "Janey Doooy";
+
+            baggedLunch = rand.nextBoolean();
+            isOvernight = rand.nextBoolean();
+
+        }
+
+    }
+
     class ScheduleEvents{
         public Date eventTime;
         public String eventName;
         public int timeForReminder;
         public String eventLocation;
+
+
 
         ScheduleEvents(Date time, String name, int reminder, String location)
         {
@@ -34,10 +119,15 @@ public class MainActivity extends AppCompatActivity {
             eventLocation = location;
         }
     }
+
+
     int currentIndex = 0;
     int nextIndex = 0;
     Date transition;
     ArrayList<ScheduleEvents> scheduleEvents = new ArrayList<>();
+    Camper[] campers;
+    ArrayList<Camper> group1Campers = new ArrayList<>(), group2Campers = new ArrayList<>(), group3Campers = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +152,32 @@ public class MainActivity extends AppCompatActivity {
             SortSchedule();
         }
         RunScheduler();
+
+        Random rand = new Random();
+        int numOfCampers = rand.nextInt(30) + 50;
+        campers = new Camper[numOfCampers];
+        for(int i = 0; i < numOfCampers; i++)
+        {
+            campers[i] = new Camper();
+            campers[i].RandomizeCamper();
+            switch (campers[i].age)
+            {
+                case 7:
+                case 8:
+                case 9:
+                    group1Campers.add(campers[i]);
+                    break;
+                case 10-12:
+                    group2Campers.add(campers[i]);
+                    break;
+                case 13-17:
+                    group3Campers.add(campers[i]);
+                    break;
+
+            }
+        }
+
+
     }
 
     void SortSchedule()
@@ -150,7 +266,7 @@ public class MainActivity extends AppCompatActivity {
         ConvertScheduleToToday();
         currentIndex = FindPlaceInSchedule();
         System.out.println(currentIndex);
-        Calendar temp = Calendar.getInstance();
+        final Calendar temp = Calendar.getInstance();
         System.out.println(scheduleEvents.get(0).eventName + " is at " + scheduleEvents.get(0).eventTime.toString());
         System.out.println("The current date and time is " + temp.getTime());
         nextIndex = (currentIndex != scheduleEvents.size() - 1)? currentIndex + 1 : 0;
@@ -159,9 +275,10 @@ public class MainActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Calendar thisSecond = Calendar.getInstance();
+
 
                 //Schedule Code
+                Calendar thisSecond = Calendar.getInstance();
                 TextView current = findViewById(R.id.currentActivity);
                 if(currentIndex == -1)
                     current.setText("No Current Activity");
@@ -181,6 +298,15 @@ public class MainActivity extends AppCompatActivity {
                     nextIndex = (currentIndex + 1 == scheduleEvents.size()) ? 0: currentIndex +1;
                     transition = GetTimeForNextTransition(nextIndex);
                 }
+
+
+                //Count Code
+                TextView tempView = findViewById(R.id.group1TextView);
+                tempView.setText("Group 1s: " + group1Campers.size());
+                tempView = findViewById(R.id.group2TextView);
+                tempView.setText("Group 2s: " + group2Campers.size());
+                tempView = findViewById(R.id.group3TextView);
+                tempView.setText("Group 3s: " + group3Campers.size());
                 handler.postDelayed(this, delay);
             }
         }, delay);
