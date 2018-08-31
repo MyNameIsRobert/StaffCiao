@@ -53,9 +53,9 @@ public class MainActivity extends AppCompatActivity {
         if(scheduleEvents.isEmpty())
         {
             Calendar tempCal = Calendar.getInstance();
-            tempCal.set(0, 0, 0, 13, 30, 0);
+            tempCal.set(0, 0, 0, 10, 30, 0);
             ScheduleEvents temp = new ScheduleEvents(tempCal.getTime(), "Lunch", 15, "Cafeteria");
-            tempCal.set(0,0,0,12,30,0);
+            tempCal.set(0,0,0,11,30,0);
             scheduleEvents.add(temp);
             temp = new ScheduleEvents(tempCal.getTime(), "Instructional Time", 10, "HVC 202");
             scheduleEvents.add((temp));
@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
             //If the current time is after the time on the Schedule
             if(currentTime.after(scheduleEvents.get(i).eventTime))
             {
+                System.out.println("The current time is after " + scheduleEvents.get(i).eventName + " at " + scheduleEvents.get(i).eventTime);
                 //If the event at index: i is the not the last event on the schedule
                 if(i != scheduleEvents.size()-1)
                 {
@@ -95,9 +96,20 @@ public class MainActivity extends AppCompatActivity {
                        tempIndex = i;
                        break;
                    }
+                   else
+                   {
+                       System.out.println(currentTime + " is after " + scheduleEvents.get(i + 1).eventName + " at " + scheduleEvents.get(i + 1).eventTime);
+
+                   }
+                }
+                else
+                {
+                    tempIndex = i;
                 }
             }
-
+            else {
+                System.out.println(currentTime + " is before " + scheduleEvents.get(i).eventName + " at " + scheduleEvents.get(i).eventTime);
+            }
         }
         return tempIndex;
 
@@ -108,7 +120,11 @@ public class MainActivity extends AppCompatActivity {
         for(int i = 0; i < scheduleEvents.size(); i++)
         {
             Calendar cal = Calendar.getInstance();
+            cal.setTimeZone(TimeZone.getDefault());
+            System.out.println("Hour before conversion: " + scheduleEvents.get(i).eventTime.getHours());
+            System.out.println("Calendar hour before conversion: " + cal.getTime().getHours());
             cal.set(Calendar.HOUR, scheduleEvents.get(i).eventTime.getHours());
+            System.out.println("Hour after conversion: " + cal.getTime().getHours());
             cal.set(Calendar.MINUTE, scheduleEvents.get(i).eventTime.getMinutes());
             cal.set(Calendar.SECOND, scheduleEvents.get(i).eventTime.getSeconds());
             scheduleEvents.get(i).eventTime = cal.getTime();
@@ -123,15 +139,20 @@ public class MainActivity extends AppCompatActivity {
     {
         Date transitionReturn;
         transitionReturn = scheduleEvents.get(index).eventTime;
-        transitionReturn.setTime(transitionReturn.getTime() - (scheduleEvents.get(index).timeForReminder  * 1000 /*Converts the time to milliseconds*/));
+        transitionReturn.setTime(transitionReturn.getTime() - (scheduleEvents.get(index).timeForReminder * 60 * 1000 /*Converts the time to milliseconds*/));
+        System.out.println("Transition time is " + transitionReturn);
         return transitionReturn;
     }
     void RunScheduler()
     {
         final Handler handler = new Handler();
         final int delay = 1000; //1 Second
-        currentIndex = FindPlaceInSchedule();
         ConvertScheduleToToday();
+        currentIndex = FindPlaceInSchedule();
+        System.out.println(currentIndex);
+        Calendar temp = Calendar.getInstance();
+        System.out.println(scheduleEvents.get(0).eventName + " is at " + scheduleEvents.get(0).eventTime.toString());
+        System.out.println("The current date and time is " + temp.getTime());
         nextIndex = (currentIndex != scheduleEvents.size() - 1)? currentIndex + 1 : 0;
         transition = GetTimeForNextTransition(nextIndex);
 
@@ -142,13 +163,17 @@ public class MainActivity extends AppCompatActivity {
 
                 //Schedule Code
                 TextView current = findViewById(R.id.currentActivity);
-                current.setText("Current Activity; " + scheduleEvents.get(currentIndex).eventName);
+                if(currentIndex == -1)
+                    current.setText("No Current Activity");
+                else
+                    current.setText("Current Activity; " + scheduleEvents.get(currentIndex).eventName);
                 TextView next = findViewById(R.id.nextActivity);
                 SimpleDateFormat transitionFormatted = new SimpleDateFormat("hh:mm a");
                 String transitionString = "";
                 transitionString = transitionFormatted.format(transition);
                 next.setText("Next Activity: " + scheduleEvents.get(nextIndex).eventName + "(" + transitionString + ")");
-
+                TextView debugView = findViewById(R.id.debugView);
+                debugView.setText("Current time is " + ((transition.getTime() - thisSecond.getTime().getTime())) + " seconds away");
                 if(thisSecond.after(transition))
                 {
                     NotifyOfTransition();

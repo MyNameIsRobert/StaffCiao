@@ -55,6 +55,12 @@
                     android:text="Next Activity: Instructional Time (12:30)"
                     android:textAlignment="center"
                     android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/debugView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Debug" />
             </LinearLayout>
 
         </LinearLayout>
