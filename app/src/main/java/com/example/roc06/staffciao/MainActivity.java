@@ -160,21 +160,12 @@ public class MainActivity extends AppCompatActivity {
         {
             campers[i] = new Camper();
             campers[i].RandomizeCamper();
-            switch (campers[i].age)
-            {
-                case 7:
-                case 8:
-                case 9:
-                    group1Campers.add(campers[i]);
-                    break;
-                case 10-12:
-                    group2Campers.add(campers[i]);
-                    break;
-                case 13-17:
-                    group3Campers.add(campers[i]);
-                    break;
-
-            }
+            if(campers[i].age < 10)
+                group1Campers.add(campers[i]);
+            else if(campers[i].age < 13)
+                group2Campers.add(campers[i]);
+            else
+                group3Campers.add(campers[i]);
         }
 
 
