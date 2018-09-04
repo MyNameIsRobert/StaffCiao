@@ -22,6 +22,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -49,65 +50,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public class Camper
-    {
-        public String camperName;
-        public int age;
-        public String courseName;
-        public String camperNickName;
-        public MedicalInformation[] medicalInformations;
-        public String tShirtSize;
-        public boolean baggedLunch;
-        public boolean isOvernight;
-        public char maleOrFemale;
 
-        public Camper()
-        {
-            camperName = "Johnny Doey";
-            age = 10;
-            courseName = "Roblox";
-            camperNickName = "John";
-            medicalInformations = null;
-            tShirtSize = "Adult Small";
-            baggedLunch = false;
-            isOvernight = true;
-            maleOrFemale = 'M';
-        }
-
-        public Camper(String name, int a, String cName, String nickName, MedicalInformation[] medInfo, String tShirt, boolean bag, boolean over, char mOrF)
-        {
-            camperNickName = name;
-            age = a;
-            courseName = cName;
-            camperNickName = nickName;
-            medicalInformations = medInfo;
-            tShirtSize = tShirt;
-            baggedLunch = bag;
-            isOvernight = over;
-            if(mOrF != 'F' && mOrF != 'f' && mOrF != 'M' && mOrF != 'm')
-            {
-                mOrF = 'M';
-            }
-            maleOrFemale = mOrF;
-        }
-
-        public void RandomizeCamper()
-        {
-            Random rand = new Random();
-            age = rand.nextInt(10);
-            age += 7;
-            maleOrFemale = (rand.nextInt(1) == 1)? 'M':'F';
-            if(maleOrFemale == 'M')
-                camperName = "Johnny Doey";
-            else
-                camperName = "Janey Doooy";
-
-            baggedLunch = rand.nextBoolean();
-            isOvernight = rand.nextBoolean();
-
-        }
-
-    }
 
     class ScheduleEvents{
         public Date eventTime;
@@ -131,9 +74,8 @@ public class MainActivity extends AppCompatActivity {
     int nextIndex = 0;
     Date transition;
     ArrayList<ScheduleEvents> scheduleEvents = new ArrayList<>();
-    Camper[] campers;
+    public Camper[] campers;
     ArrayList<Camper> group1Campers = new ArrayList<>(), group2Campers = new ArrayList<>(), group3Campers = new ArrayList<>();
-
 
 
     @Override
@@ -315,7 +257,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void viewGroup1s(View view)
     {
-        
+
     }
 
 
