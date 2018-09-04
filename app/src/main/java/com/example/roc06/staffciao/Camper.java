@@ -1,5 +1,6 @@
 package com.example.roc06.staffciao;
 
+import java.util.Date;
 import java.util.Random;
 
 public class Camper
@@ -8,12 +9,31 @@ public class Camper
     public int age;
     public String courseName;
     public String camperNickName;
-    public MainActivity.MedicalInformation[] medicalInformations;
+    public MedicalInformation[] medicalInformations;
     public String tShirtSize;
     public boolean baggedLunch;
     public boolean isOvernight;
     public char maleOrFemale;
     public boolean prefersNickname = false;
+
+
+    public class MedicalInformation
+    {
+        public String medicationInfo;
+        public Date whenToTake;
+        int severityLevel;
+
+        public MedicalInformation(String medInfo, Date when)
+        {
+            medicationInfo = medInfo;
+            whenToTake = when;
+        }
+
+        public void setSeverityLevel(int severityLevel)
+        {
+            this.severityLevel = severityLevel;
+        }
+    }
 
     public Camper()
     {
@@ -28,7 +48,7 @@ public class Camper
         maleOrFemale = 'M';
     }
 
-    public Camper(String name, int a, String cName, String nickName, MainActivity.MedicalInformation[] medInfo, String tShirt, boolean bag, boolean over, char mOrF)
+    public Camper(String name, int a, String cName, String nickName, MedicalInformation[] medInfo, String tShirt, boolean bag, boolean over, char mOrF)
     {
         camperNickName = name;
         age = a;

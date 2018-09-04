@@ -1,6 +1,7 @@
 package com.example.roc06.staffciao;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
@@ -32,23 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public class MedicalInformation
-    {
-        public String medicationInfo;
-        public Date whenToTake;
-        int severityLevel;
 
-        public MedicalInformation(String medInfo, Date when)
-        {
-            medicationInfo = medInfo;
-            whenToTake = when;
-        }
-
-        public void setSeverityLevel(int severityLevel)
-        {
-            this.severityLevel = severityLevel;
-        }
-    }
 
 
 
@@ -257,6 +242,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void viewGroup1s(View view)
     {
+        Intent intent = new Intent(this, extraCountInformation.class);
+        startActivity(intent);
 
     }
 
