@@ -3,4 +3,8 @@
     <string name="employee_name">John Doe</string>
     <string name="employee_nickname">Boulder</string>
     <string name="employee_title">Instructor</string>
+    <string name="activity2_name">extraCount</string>
+    <string name="radioButton1_Text">Roster</string>
+    <string name="radioButton2_Text">More Info</string>
+    <string name="radioButton3_Text">Most Info</string>
 </resources>

@@ -121,7 +121,8 @@
                         android:layout_weight="1"
                         android:text="Group 1s: 8"
                         android:textAlignment="center"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:onClick="viewGroup1s"/>
 
                     <View
                         android:id="@+id/divider3"

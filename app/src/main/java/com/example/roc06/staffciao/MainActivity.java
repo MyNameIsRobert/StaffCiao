@@ -1,8 +1,12 @@
 package com.example.roc06.staffciao;
 
+import android.content.Context;
 import android.os.Handler;
+import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -19,6 +23,8 @@ import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+
 
     public class ScheduleOptions
     {
@@ -128,6 +134,8 @@ public class MainActivity extends AppCompatActivity {
     Camper[] campers;
     ArrayList<Camper> group1Campers = new ArrayList<>(), group2Campers = new ArrayList<>(), group3Campers = new ArrayList<>();
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -184,6 +192,7 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println(scheduleEvents.get(i).eventName);
             }
     }
+
     int FindPlaceInSchedule()
     {
         int tempIndex = -1;
@@ -301,6 +310,12 @@ public class MainActivity extends AppCompatActivity {
                 handler.postDelayed(this, delay);
             }
         }, delay);
+    }
+
+
+    public void viewGroup1s(View view)
+    {
+        
     }
 
 
