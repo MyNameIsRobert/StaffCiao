@@ -1,5 +1,6 @@
 package com.example.roc06.staffciao;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.CheckBox;
@@ -7,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class extraCountInformation extends AppCompatActivity {
 
@@ -23,10 +25,18 @@ public class extraCountInformation extends AppCompatActivity {
 
     ArrayList<Camper> campersToDisplay = new ArrayList<>();
 
+    Camper[] allCampers;
+
+    RosterType rosterTyp = RosterType.Group1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_extra_count_information);
+        Intent intent = getIntent();
+        Bundle args = intent.getBundleExtra("BUNDLE");
+        allCampers = (Camper[])args.getSerializable("ARRAY");
+        rosterTyp = RosterType.values()[intent.getIntExtra("RosterType", 0)];
+        SetCounts(rosterTyp, allCampers);
     }
 
     public void SetCounts(RosterType type, Camper[] campers)
@@ -46,6 +56,7 @@ public class extraCountInformation extends AppCompatActivity {
                 medsBox.setChecked(true);
             else
                 medsBox.setChecked(false);
+            layout.addView(tempLayout);
         }
     }
     public void SetCounts(RosterType type, Camper[] campers,  String additionalInfo)
