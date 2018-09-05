@@ -3,8 +3,12 @@ package com.example.roc06.staffciao;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.Space;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -35,7 +39,7 @@ public class extraCountInformation extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle args = intent.getBundleExtra("BUNDLE");
         allCampers = (Camper[])args.getSerializable("ARRAY");
-        rosterTyp = RosterType.values()[intent.getIntExtra("RosterType", 0)];
+        rosterTyp = (RosterType) intent.getSerializableExtra("RosterType");
         SetCounts(rosterTyp, allCampers);
     }
 
@@ -43,13 +47,18 @@ public class extraCountInformation extends AppCompatActivity {
     {
         FilterCampers(type, campers);
         LinearLayout layout = findViewById(R.id.roster_Layout);
-        LinearLayout horizLayout = findViewById(R.id.roster_Layout_Horizontal);
 
         for(int i = 0; i < campersToDisplay.size(); i++) {
-            LinearLayout tempLayout = horizLayout;
+            LinearLayout tempLayout = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.camperdisplay_layoutview, null) ;
             TextView camperName = (TextView) tempLayout.getChildAt(0);
+            TextView camperAge = (TextView) tempLayout.getChildAt(1);
+            String age = String.valueOf(campersToDisplay.get(i).age);
+            camperAge.setText(age);
             camperName.setText(campersToDisplay.get(i).getName());
+            if(tempLayout.getParent() != null)
+                ((ViewGroup)tempLayout.getParent()).removeView(tempLayout);
             layout.addView(tempLayout);
+            layout.addView(LayoutInflater.from(this).inflate(R.layout.blank_space, null));
         }
     }
     public void SetCounts(RosterType type, Camper[] campers,  String additionalInfo)

@@ -246,9 +246,20 @@ public class MainActivity extends AppCompatActivity {
         Bundle args = new Bundle();
         args.putSerializable("ARRAY", campers);
         intent.putExtra("BUNDLE", args);
+        intent.putExtra("RosterType", extraCountInformation.RosterType.Group1);
         startActivity(intent);
 
     }
+    public void viewGroup2s(View view)
+    {
+        Intent intent = new Intent(this, extraCountInformation.class);
+        Bundle args = new Bundle();
+        args.putSerializable("ARRAY", campers);
+        intent.putExtra("BUNDLE", args);
+        intent.putExtra("RosterType", extraCountInformation.RosterType.Group2);
+        startActivity(intent);
+    }
+
 
 
 }

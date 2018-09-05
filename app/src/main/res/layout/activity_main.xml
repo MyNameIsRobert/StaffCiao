@@ -138,7 +138,8 @@
                         android:layout_weight="1"
                         android:text="Group 2s: 19"
                         android:textAlignment="center"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:onClick="viewGroup2s"/>
 
                     <View
                         android:id="@+id/divider4"

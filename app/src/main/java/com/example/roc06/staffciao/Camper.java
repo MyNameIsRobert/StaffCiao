@@ -69,17 +69,21 @@ public class Camper implements Serializable
     public void RandomizeCamper()
     {
         String[] courses = {"Roblox", "Robotics", "Java Programming", "Pi-Tops"};
-        String[] maleNames = {"John", "Jim", "Tim", "Rob", "Bob", "Cooper"};
-        String[] femaleNames = {"Jane", "Audrey", "Becky", "Maddie", "Sarah", "Erin"};
+        String[] maleNames = {"John", "Jim", "Tim", "Rob", "Bob", "Cooper", "Liam", "Noah", "William", "James", "Logan", "Ben", "Mason"};
+        String[] femaleNames = {"Jane", "Audrey", "Becky", "Maddie", "Sarah", "Erin", "Emma",  "Olivia", "Sophia", "Charlotte", "Emily"};
+        String[] lastNames = {"Smith", "Adams", "Lee", "Clark", "Turner", "Arnsdorff", "Strickland", "Dixon", "Jones", "Brown", "Miller", "Williams", "Taylor"};
+
+
 
         Random rand = new Random();
         age = rand.nextInt(10);
         age += 7;
         maleOrFemale = (rand.nextInt(1) == 1)? 'M':'F';
         if(maleOrFemale == 'M')
-            camperName = maleNames[rand.nextInt(maleNames.length)];
+            camperName = maleNames[rand.nextInt(maleNames.length)] + " " + lastNames[rand.nextInt(lastNames.length)];
+
         else
-            camperName = femaleNames[rand.nextInt(femaleNames.length)];
+            camperName = femaleNames[rand.nextInt(femaleNames.length)] + " " + lastNames[rand.nextInt(lastNames.length)];
 
         baggedLunch = rand.nextBoolean();
         isOvernight = rand.nextBoolean();

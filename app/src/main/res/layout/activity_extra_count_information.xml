@@ -17,21 +17,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TableRow
-                android:id="@+id/roster_Layout_Horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="left"
-                android:paddingLeft="10dp">
 
-                <TextView
-                    android:id="@+id/exampleTextViewRoster"
-                    android:layout_width="175dp"
-                    android:layout_height="wrap_content"
-                    android:text="John Doe"
-                    android:textSize="18sp" />
-
-            </TableRow>
         </LinearLayout>
     </ScrollView>
 
