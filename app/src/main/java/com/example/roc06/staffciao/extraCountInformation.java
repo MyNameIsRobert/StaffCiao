@@ -49,13 +49,6 @@ public class extraCountInformation extends AppCompatActivity {
             LinearLayout tempLayout = horizLayout;
             TextView camperName = (TextView) tempLayout.getChildAt(0);
             camperName.setText(campersToDisplay.get(i).getName());
-            TextView age = (TextView) tempLayout.getChildAt(1);
-            age.setText(campersToDisplay.get(i).age);
-            CheckBox medsBox = (CheckBox) tempLayout.getChildAt(2);
-            if(campersToDisplay.get(i).medicalInformations != null)
-                medsBox.setChecked(true);
-            else
-                medsBox.setChecked(false);
             layout.addView(tempLayout);
         }
     }

@@ -31,20 +31,6 @@
                     android:text="John Doe"
                     android:textSize="18sp" />
 
-                <TextView
-                    android:id="@+id/exampleTextViewRoster2"
-                    android:layout_width="25dp"
-                    android:layout_height="wrap_content"
-                    android:text="14"
-                    android:textSize="18sp" />
-
-                <CheckBox
-                    android:id="@+id/hasMeds_Checkbox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="false"
-                    android:duplicateParentState="true"
-                    />
             </TableRow>
         </LinearLayout>
     </ScrollView>

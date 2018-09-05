@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
-import java.io.Serializable;
 import java.sql.Time;
 import java.text.DateFormat;
 import java.text.FieldPosition;
@@ -241,12 +240,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void viewGroup1s(View view) {
+    public void viewGroup1s(View view)
+    {
         Intent intent = new Intent(this, extraCountInformation.class);
         Bundle args = new Bundle();
-        args.putSerializable("ARRAY", (Serializable) campers);
+        args.putSerializable("ARRAY", campers);
         intent.putExtra("BUNDLE", args);
         startActivity(intent);
+
     }
+
 
 }
