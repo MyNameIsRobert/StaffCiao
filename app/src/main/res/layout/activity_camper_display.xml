@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".camperDisplay">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/camperName_TextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Camper Name"
+            android:textAlignment="center"
+            android:textSize="36sp" />
+
+        <TextView
+            android:id="@+id/camperAge_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="13 Years Old"
+            android:textSize="24dp" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/camperCourse_TextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Course Name"
+            android:textSize="24dp" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/camperShirtSize_TextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Shirt Size: T-Shirt Size"
+            android:textSize="24dp" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/camperLunchType_TextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Bagged Lunch/Cafe Lunch"
+            android:textSize="24dp" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/camperIsOvernight_TextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Overnight"
+            android:textSize="24dp" />
+
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

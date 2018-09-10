@@ -3,6 +3,7 @@ package com.example.roc06.staffciao;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,7 @@ public class extraCountInformation extends AppCompatActivity {
             LinearLayout tempLayout = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.camperdisplay_layoutview, null) ;
             TextView camperName = (TextView) tempLayout.getChildAt(0);
             TextView camperAge = (TextView) tempLayout.getChildAt(1);
+            tempLayout.setId(i);
             String age = String.valueOf(campersToDisplay.get(i).age);
             camperAge.setText(age);
             camperName.setText(campersToDisplay.get(i).getName());
@@ -64,6 +66,20 @@ public class extraCountInformation extends AppCompatActivity {
     public void SetCounts(RosterType type, Camper[] campers,  String additionalInfo)
     {
 
+    }
+
+    public void displayCamperInfo(View view)
+    {
+        LinearLayout layout = (LinearLayout) view.getParent();
+        int camperIndex = view.getId();
+        if(camperIndex >= campersToDisplay.size())
+        {
+            System.out.println(camperIndex + " is too large");
+            Log.d(camperIndex + " is too large", "Too big");
+        }
+        Intent intent = new Intent(this, camperDisplay.class);
+        intent.putExtra("Camper", campersToDisplay.get(camperIndex));
+        startActivity(intent);
     }
 
     void FilterCampers(RosterType type, Camper[] campers)
