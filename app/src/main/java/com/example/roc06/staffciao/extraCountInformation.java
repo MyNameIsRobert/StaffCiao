@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.Space;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -53,7 +54,20 @@ public class extraCountInformation extends AppCompatActivity {
             LinearLayout tempLayout = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.camperdisplay_layoutview, null) ;
             TextView camperName = (TextView) tempLayout.getChildAt(0);
             TextView camperAge = (TextView) tempLayout.getChildAt(1);
-            tempLayout.setId(i);
+            camperName.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    LinearLayout layout = (LinearLayout) view.getParent();
+                    System.out.println(view.toString());
+                    int camperIndex = ((LinearLayout) layout.getParent()).indexOfChild(layout) / 2;
+                    Log.d("CamperIndex", "Cameper index is " + camperIndex);
+                    Intent intent = new Intent(extraCountInformation.this, camperDisplay.class);
+                    intent.putExtra("Camper", campersToDisplay.get(camperIndex));
+                    startActivity(intent);
+                }
+            }
+
+            );
             String age = String.valueOf(campersToDisplay.get(i).age);
             camperAge.setText(age);
             camperName.setText(campersToDisplay.get(i).getName());
@@ -70,16 +84,7 @@ public class extraCountInformation extends AppCompatActivity {
 
     public void displayCamperInfo(View view)
     {
-        LinearLayout layout = (LinearLayout) view.getParent();
-        int camperIndex = view.getId();
-        if(camperIndex >= campersToDisplay.size())
-        {
-            System.out.println(camperIndex + " is too large");
-            Log.d(camperIndex + " is too large", "Too big");
-        }
-        Intent intent = new Intent(this, camperDisplay.class);
-        intent.putExtra("Camper", campersToDisplay.get(camperIndex));
-        startActivity(intent);
+
     }
 
     void FilterCampers(RosterType type, Camper[] campers)
@@ -95,6 +100,8 @@ public class extraCountInformation extends AppCompatActivity {
                         campersToDisplay.add(campers[i]);
                     }
                 }
+                TextView view = findViewById(R.id.title_TextView);
+                view.setText("Group 1 Roster");
                 break;
             case Group2:
                 for(int i = 0; i < campers.length; i++)
@@ -104,6 +111,8 @@ public class extraCountInformation extends AppCompatActivity {
                         campersToDisplay.add(campers[i]);
                     }
                 }
+                view = findViewById(R.id.title_TextView);
+                view.setText("Group 2 Roster");
                 break;
             case Group3:
                 for(int i = 0; i < campers.length; i++)
@@ -113,6 +122,8 @@ public class extraCountInformation extends AppCompatActivity {
                         campersToDisplay.add(campers[i]);
                     }
                 }
+                view = findViewById(R.id.title_TextView);
+                view.setText("Group 3 Roster");
                 break;
             case GroupA:
                 break;

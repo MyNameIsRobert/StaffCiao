@@ -10,9 +10,8 @@
         android:layout_width="236dp"
         android:layout_height="wrap_content"
         android:text="John Doe"
-        android:textAlignment="center"
         android:textSize="24sp"
-        android:onClick="displayCamperInfo"/>
+        />
 
     <TextView
         android:text="Age"
