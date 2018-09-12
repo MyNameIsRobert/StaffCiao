@@ -3,6 +3,7 @@ package com.example.roc06.staffciao;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -40,6 +41,7 @@ public class camperDisplay extends AppCompatActivity {
             guardianLayout.addView(tempLayout);
             TextView tempView = (TextView) tempLayout.getChildAt(0);
             tempView.setText(camper.guardianNames[i] + ":");
+            Log.d(camper.guardianNames[i], "");
             tempView = (TextView) tempLayout.getChildAt(2);
             tempView.setText(camper.guardianContactNumbers[i]);
         }
