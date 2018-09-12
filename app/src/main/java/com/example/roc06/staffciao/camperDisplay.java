@@ -41,9 +41,8 @@ public class camperDisplay extends AppCompatActivity {
             guardianLayout.addView(tempLayout);
             TextView tempView = (TextView) tempLayout.getChildAt(0);
             tempView.setText(camper.guardianNames[i] + ":");
-            Log.d(camper.guardianNames[i], "");
-            tempView = (TextView) tempLayout.getChildAt(2);
-            tempView.setText(camper.guardianContactNumbers[i]);
+            TextView numberView = (TextView) tempLayout.getChildAt(2);
+            numberView.setText(camper.guardianContactNumbers[i]);
         }
 
     }
