@@ -62,31 +62,7 @@ public class MainActivity extends AppCompatActivity {
     public Camper[] campers;
     ArrayList<Camper> group1Campers = new ArrayList<>(), group2Campers = new ArrayList<>(), group3Campers = new ArrayList<>();
 
-    StaffRoles staffRole = StaffRoles.INSTRUCTOR;
-    enum StaffRoles{
-        DIRECTOR ("Director"),
-        ASSISTANT_DIRECTOR ("Assistant Director"),
-        MEDICAL_DIRECTOR ("Medical Director"),
-        LEAD_INSTRUCTOR ("Lead Instructor"),
-        INSTRUCTOR ("Instructor"),
-        ROAMING_INSTRUCTOR ("Roaming Instructor");
-
-        final String name;
-        StaffRoles(String s)
-        {
-            name = s;
-        }
-
-        public boolean equalsName(String otherName) {
-            return name.equals(otherName);
-        }
-
-        public String ToString()
-        {
-           return this.name;
-        }
-    }
-
+    String staffRole = "Instructor";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         TextView greeting = findViewById(R.id.greeting);
         String greetingName = getString(R.string.employee_name);
         greetingName += " (";
-        greetingName += staffRole.toString();
+        greetingName += staffRole;
         greetingName += ")";
         greeting.setText(greetingName);
 
