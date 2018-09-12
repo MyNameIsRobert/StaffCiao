@@ -69,7 +69,7 @@ public class Camper implements Serializable
 
     public void RandomizeCamper()
     {
-        String[] courses = {"Roblox", "Robotics", "Java Programming", "Pi-Tops", ""};
+        String[] courses = {"Roblox", "Robotics", "Java Programming", "Pi-Tops"};
         String[] maleNames = {"John", "Jim", "Tim", "Rob", "Bob", "Cooper", "Liam", "Noah", "William", "James", "Logan", "Ben", "Mason", "Elijah", "Lucas", "Jackson", "Sam", "David", "Carter", "Robert"};
         String[] femaleNames = {"Jane", "Audrey", "Becky", "Maddie", "Sarah", "Erin", "Emma",  "Olivia", "Sophia", "Charlotte", "Emily", "Ella", "Grace", "Riley", "Layla", "Lillian", "Zoey", "Hannah", "Eleanor"};
         String[] lastNames = {"Smith", "Adams", "Lee", "Clark", "Turner", "Arnsdorff", "Strickland", "Dixon", "Jones", "Brown", "Miller", "Williams", "Taylor", "Muhammad", "Ford", "Thomas", "Wood", "Scott", "Jackson", "John", "Lee", "May", "Marshall", "Day", "Kennedy", "Cook"};
