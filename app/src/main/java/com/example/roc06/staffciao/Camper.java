@@ -89,7 +89,8 @@ public class Camper implements Serializable
         baggedLunch = rand.nextBoolean();
         isOvernight = rand.nextBoolean();
         courseName = courses[rand.nextInt(courses.length)];
-        guardianNames = guardianContactNumbers = new String[rand.nextInt(3) + 1];
+        guardianNames = new String[rand.nextInt(3) + 1];
+        guardianContactNumbers = new String[rand.nextInt(3) + 1];
         for(int i = 0; i < guardianNames.length; i++) {
             guardianNames[i] = (rand.nextBoolean())? maleNames[rand.nextInt(maleNames.length)] + " " + lastNames[rand.nextInt(lastNames.length)]: femaleNames[rand.nextInt(maleNames.length)] + " " + lastNames[rand.nextInt(lastNames.length)];
             guardianContactNumbers[i] = "803-555-5555";
