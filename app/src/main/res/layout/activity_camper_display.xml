@@ -29,7 +29,8 @@
             android:layout_height="wrap_content"
             android:text="13 Years Old"
             android:textSize="24dp"
-            tools:paddingLeft="10dp" />
+            tools:paddingLeft="10dp"
+            tools:paddingStart="10dp"/>
         <Space
             android:layout_width="match_parent"
             android:layout_height="10dp" />
@@ -40,7 +41,8 @@
             android:layout_height="match_parent"
             android:text="Course Name"
             android:textSize="24dp"
-            tools:paddingLeft="10dp" />
+            tools:paddingLeft="10dp"
+            tools:paddingStart="10dp"/>
         <Space
             android:layout_width="match_parent"
             android:layout_height="10dp" />
@@ -51,7 +53,8 @@
             android:layout_height="match_parent"
             android:text="Shirt Size: T-Shirt Size"
             android:textSize="24dp"
-            tools:paddingLeft="10dp" />
+            tools:paddingLeft="10dp"
+            tools:paddingStart="10dp"/>
         <Space
             android:layout_width="match_parent"
             android:layout_height="10dp" />
@@ -62,7 +65,8 @@
             android:layout_height="match_parent"
             android:text="Bagged Lunch/Cafe Lunch"
             android:textSize="24dp"
-            tools:paddingLeft="10dp" />
+            tools:paddingLeft="10dp"
+            tools:paddingStart="10dp"/>
         <Space
             android:layout_width="match_parent"
             android:layout_height="10dp" />
@@ -73,7 +77,8 @@
             android:layout_height="match_parent"
             android:text="Overnight"
             android:textSize="24dp"
-            tools:paddingLeft="10dp" />
+            tools:paddingLeft="10dp"
+            tools:paddingStart="10dp"/>
 
         <Space
             android:layout_width="match_parent"
@@ -86,6 +91,7 @@
             android:text="Safe Word"
             android:textSize="24sp"
             tools:paddingLeft="10dp"
+            tools:paddingStart="10dp"
             />
 
         <Space
@@ -98,7 +104,7 @@
             android:layout_height="wrap_content"
             android:text="Guardian Contact Info"
             android:textSize="24sp"
-            tools:layout_marginLeft="10dp" />
+            tools:paddingStart="10dp"/>
 
         <ScrollView
             android:layout_width="match_parent"
