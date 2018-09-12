@@ -19,12 +19,17 @@
             android:textAlignment="center"
             android:textSize="36sp" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp" />
+
         <TextView
             android:id="@+id/camperAge_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="13 Years Old"
-            android:textSize="24dp" />
+            android:textSize="24dp"
+            tools:paddingLeft="10dp" />
         <Space
             android:layout_width="match_parent"
             android:layout_height="10dp" />
@@ -34,7 +39,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Course Name"
-            android:textSize="24dp" />
+            android:textSize="24dp"
+            tools:paddingLeft="10dp" />
         <Space
             android:layout_width="match_parent"
             android:layout_height="10dp" />
@@ -44,7 +50,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Shirt Size: T-Shirt Size"
-            android:textSize="24dp" />
+            android:textSize="24dp"
+            tools:paddingLeft="10dp" />
         <Space
             android:layout_width="match_parent"
             android:layout_height="10dp" />
@@ -54,7 +61,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Bagged Lunch/Cafe Lunch"
-            android:textSize="24dp" />
+            android:textSize="24dp"
+            tools:paddingLeft="10dp" />
         <Space
             android:layout_width="match_parent"
             android:layout_height="10dp" />
@@ -64,7 +72,44 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Overnight"
-            android:textSize="24dp" />
+            android:textSize="24dp"
+            tools:paddingLeft="10dp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Safe Word"
+            android:textSize="24sp"
+            tools:paddingLeft="10dp"
+            />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Guardian Contact Info"
+            android:textSize="24sp"
+            tools:layout_marginLeft="10dp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/guardianLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </ScrollView>
 
 
     </LinearLayout>

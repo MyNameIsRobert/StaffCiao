@@ -16,7 +16,8 @@ public class Camper implements Serializable
     public boolean isOvernight;
     public char maleOrFemale;
     public boolean prefersNickname = false;
-
+    public String[] guardianNames, guardianContactNumbers;
+    public String safeWord;
 
     public class MedicalInformation
     {
@@ -68,17 +69,17 @@ public class Camper implements Serializable
 
     public void RandomizeCamper()
     {
-        String[] courses = {"Roblox", "Robotics", "Java Programming", "Pi-Tops"};
-        String[] maleNames = {"John", "Jim", "Tim", "Rob", "Bob", "Cooper", "Liam", "Noah", "William", "James", "Logan", "Ben", "Mason"};
-        String[] femaleNames = {"Jane", "Audrey", "Becky", "Maddie", "Sarah", "Erin", "Emma",  "Olivia", "Sophia", "Charlotte", "Emily"};
-        String[] lastNames = {"Smith", "Adams", "Lee", "Clark", "Turner", "Arnsdorff", "Strickland", "Dixon", "Jones", "Brown", "Miller", "Williams", "Taylor"};
-
+        String[] courses = {"Roblox", "Robotics", "Java Programming", "Pi-Tops", ""};
+        String[] maleNames = {"John", "Jim", "Tim", "Rob", "Bob", "Cooper", "Liam", "Noah", "William", "James", "Logan", "Ben", "Mason", "Elijah", "Lucas", "Jackson", "Sam", "David", "Carter", "Robert"};
+        String[] femaleNames = {"Jane", "Audrey", "Becky", "Maddie", "Sarah", "Erin", "Emma",  "Olivia", "Sophia", "Charlotte", "Emily", "Ella", "Grace", "Riley", "Layla", "Lillian", "Zoey", "Hannah", "Eleanor"};
+        String[] lastNames = {"Smith", "Adams", "Lee", "Clark", "Turner", "Arnsdorff", "Strickland", "Dixon", "Jones", "Brown", "Miller", "Williams", "Taylor", "Muhammad", "Ford", "Thomas", "Wood", "Scott", "Jackson", "John", "Lee", "May", "Marshall", "Day", "Kennedy", "Cook"};
+        String[] safeWords = {"Snow", "Prick", "Guess", "North", "Gainful", "Long-Term", "Shade", "Salty", "Gorgeous", "Tie", "Route", "Wet", "Hard", "Preach", "Subdue"};
 
 
         Random rand = new Random();
         age = rand.nextInt(10);
         age += 7;
-        maleOrFemale = (rand.nextInt(1) == 1)? 'M':'F';
+        maleOrFemale = (rand.nextBoolean())? 'M':'F';
         if(maleOrFemale == 'M')
             camperName = maleNames[rand.nextInt(maleNames.length)] + " " + lastNames[rand.nextInt(lastNames.length)];
 
@@ -88,7 +89,12 @@ public class Camper implements Serializable
         baggedLunch = rand.nextBoolean();
         isOvernight = rand.nextBoolean();
         courseName = courses[rand.nextInt(courses.length)];
-
+        guardianNames = guardianContactNumbers = new String[rand.nextInt(3) + 1];
+        for(int i = 0; i < guardianNames.length; i++) {
+            guardianNames[i] = (rand.nextBoolean())? maleNames[rand.nextInt(maleNames.length)] + " " + lastNames[rand.nextInt(lastNames.length)]: femaleNames[rand.nextInt(maleNames.length)] + " " + lastNames[rand.nextInt(lastNames.length)];
+            guardianContactNumbers[i] = "803-555-5555";
+        }
+        safeWord = safeWords[rand.nextInt(safeWords.length)];
     }
 
     public boolean isGroup1()
