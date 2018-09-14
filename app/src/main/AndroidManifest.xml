@@ -25,10 +25,14 @@
                 android:value="com.example.roc06.staffciao.MainActivity" />
         </activity>
         <activity
-            android:name=".camperdisplay"
+            android:name=".camperDisplay"
             android:label="@string/title_activity_camperdisplay"
             android:theme="@style/AppTheme" />
-        <activity android:name=".camperDisplay"></activity>
+        <activity
+            android:name=".ScheduleDisplay"
+            android:label="@string/title_activity_schedule_viewer"
+            android:theme="@style/AppTheme" />
+
     </application>
 
 </manifest>
