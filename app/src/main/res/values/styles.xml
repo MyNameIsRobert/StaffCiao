@@ -7,5 +7,13 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="Theme.StaffCiaoHome" parent="Theme.AppCompat.NoActionBar" >
+        <item name="android:colorForeground">@color/colorGreenForeGround</item>
+        <item name="android:textColorPrimary">?attr/colorPrimary</item>
+        <item name="android:colorBackground">@color/colorBackground</item>
+        <item name="colorPrimary">@color/primary_material_light_turqoise</item>
+        <item name="colorPrimaryDark">?attr/colorPrimary</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
+    </style>
 
 </resources>

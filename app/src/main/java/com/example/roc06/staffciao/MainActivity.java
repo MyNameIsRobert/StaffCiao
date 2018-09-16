@@ -34,11 +34,14 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Camper> group1Campers = new ArrayList<>(), group2Campers = new ArrayList<>(), group3Campers = new ArrayList<>();
 
     String staffRole = "Instructor";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
+
 
         TextView greeting = findViewById(R.id.greeting);
         String greetingName = getString(R.string.employee_name);
