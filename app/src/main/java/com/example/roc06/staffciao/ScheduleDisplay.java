@@ -19,7 +19,7 @@ public class ScheduleDisplay extends AppCompatActivity {
         LinearLayout linearLayout = findViewById(R.id.schedule_scroll_linearLayout);
 
         for (ScheduleEvents event:InternalData.scheduleEvents) {
-            LinearLayout temp = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.camperdisplay_layoutview, null);
+            LinearLayout temp = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.schedule_view_layout, null);
             linearLayout.addView(temp);
             TextView tempView;
             tempView = (TextView) temp.getChildAt(0);
