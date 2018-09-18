@@ -14,6 +14,7 @@
         <item name="colorPrimary">@color/primary_material_light_turqoise</item>
         <item name="colorPrimaryDark">?attr/colorPrimary</item>
         <item name="android:windowBackground">@color/colorBackground</item>
+        <item name="navigationViewStyle">@color/background_material_green_light</item>
     </style>
 
 </resources>

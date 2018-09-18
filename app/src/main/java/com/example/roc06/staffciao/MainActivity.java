@@ -229,5 +229,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
+    public void viewSchedule(View view) {
+        Intent intent = new Intent(this, ScheduleDisplay.class);
+        startActivity(intent);
+    }
 }
