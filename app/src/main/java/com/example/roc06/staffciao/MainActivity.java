@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         greeting.setText(greetingName);
 
         InternalData.fillCampers();
+        InternalData.fillEvents();
         for(int i = 0; i < InternalData.campers.size(); i++)
         {
             if(InternalData.campers.get(i).age < 10)

@@ -44,6 +44,7 @@ public class InternalData {
         campers = new ArrayList<>(numOfCampers);
         for(int i = 0; i < numOfCampers; i++)
         {
+            campers.add(new Camper());
             campers.get(i).RandomizeCamper();
         }
     }
