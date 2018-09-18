@@ -24,6 +24,10 @@ public class InternalData {
 
     public static void fillEvents()
     {
+        if(scheduleEvents == null)
+        {
+            scheduleEvents = new ArrayList<>();
+        }
         if(scheduleEvents.isEmpty())
         {
             Calendar tempCal = Calendar.getInstance();
