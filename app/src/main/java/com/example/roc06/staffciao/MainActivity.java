@@ -50,9 +50,6 @@ public class MainActivity extends AppCompatActivity {
         greetingName += ")";
         greeting.setText(greetingName);
 
-        SortSchedule();
-        RunScheduler();
-
         InternalData.fillCampers();
         for(int i = 0; i < InternalData.campers.size(); i++)
         {
@@ -63,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
             else
                 group3Campers.add(InternalData.campers.get(i));
         }
+
+        SortSchedule();
+        RunScheduler();
 
 
     }
