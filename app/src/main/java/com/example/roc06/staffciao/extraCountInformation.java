@@ -31,7 +31,6 @@ public class extraCountInformation extends AppCompatActivity {
 
     ArrayList<Camper> campersToDisplay = new ArrayList<>();
 
-    Camper[] allCampers;
 
     RosterType rosterTyp = RosterType.Group1;
     @Override
@@ -39,10 +38,8 @@ public class extraCountInformation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_extra_count_information);
         Intent intent = getIntent();
-        Bundle args = intent.getBundleExtra("BUNDLE");
-        allCampers = (Camper[])args.getSerializable("ARRAY");
         rosterTyp = (RosterType) intent.getSerializableExtra("RosterType");
-        SetCounts(rosterTyp, allCampers);
+        SetCounts(rosterTyp, (Camper[]) InternalData.campers.toArray());
     }
 
     public void SetCounts(RosterType type, Camper[] campers)
@@ -66,7 +63,6 @@ public class extraCountInformation extends AppCompatActivity {
                     startActivity(intent);
                 }
             }
-
             );
             String age = String.valueOf(campersToDisplay.get(i).age);
             camperAge.setText(age);
@@ -82,10 +78,6 @@ public class extraCountInformation extends AppCompatActivity {
 
     }
 
-    public void displayCamperInfo(View view)
-    {
-
-    }
 
     void FilterCampers(RosterType type, Camper[] campers)
     {

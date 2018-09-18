@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.text.DateFormat;
 import java.text.FieldPosition;
@@ -27,47 +28,20 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
 
-
-    public class ScheduleOptions
-    {
-
-    }
-
-
-
-
-
-    class ScheduleEvents{
-        public Date eventTime;
-        public String eventName;
-        public int timeForReminder;
-        public String eventLocation;
-
-
-
-        ScheduleEvents(Date time, String name, int reminder, String location)
-        {
-            eventTime = time;
-            eventName = name;
-            timeForReminder = reminder;
-            eventLocation = location;
-        }
-    }
-
-
     int currentIndex = 0;
     int nextIndex = 0;
     Date transition;
-    ArrayList<ScheduleEvents> scheduleEvents = new ArrayList<>();
-    public Camper[] campers;
     ArrayList<Camper> group1Campers = new ArrayList<>(), group2Campers = new ArrayList<>(), group3Campers = new ArrayList<>();
 
     String staffRole = "Instructor";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
+
 
         TextView greeting = findViewById(R.id.greeting);
         String greetingName = getString(R.string.employee_name);
@@ -76,48 +50,41 @@ public class MainActivity extends AppCompatActivity {
         greetingName += ")";
         greeting.setText(greetingName);
 
-        if(scheduleEvents.isEmpty())
-        {
-            Calendar tempCal = Calendar.getInstance();
-            tempCal.set(0, 0, 0, 10, 30, 0);
-            ScheduleEvents temp = new ScheduleEvents(tempCal.getTime(), "Lunch", 15, "Cafeteria");
-            tempCal.set(0,0,0,11,30,0);
-            scheduleEvents.add(temp);
-            temp = new ScheduleEvents(tempCal.getTime(), "Instructional Time", 10, "HVC 202");
-            scheduleEvents.add((temp));
-            SortSchedule();
-        }
+        SortSchedule();
         RunScheduler();
 
-        Random rand = new Random();
-        int numOfCampers = rand.nextInt(30) + 50;
-        campers = new Camper[numOfCampers];
-        for(int i = 0; i < numOfCampers; i++)
+        InternalData.fillCampers();
+        for(int i = 0; i < InternalData.campers.size(); i++)
         {
-            campers[i] = new Camper();
-            campers[i].RandomizeCamper();
-            if(campers[i].age < 10)
-                group1Campers.add(campers[i]);
-            else if(campers[i].age < 13)
-                group2Campers.add(campers[i]);
+            if(InternalData.campers.get(i).age < 10)
+                group1Campers.add(InternalData.campers.get(i));
+            else if(InternalData.campers.get(i).age < 13)
+                group2Campers.add(InternalData.campers.get(i));
             else
-                group3Campers.add(campers[i]);
+                group3Campers.add(InternalData.campers.get(i));
         }
 
 
     }
 
+    @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
+        InternalData.StoreAllData();
+    }
+
     void SortSchedule()
-    {        Collections.sort(scheduleEvents, new Comparator<ScheduleEvents>() {
+    {        Collections.sort(InternalData.scheduleEvents, new Comparator<ScheduleEvents>() {
             public int compare(ScheduleEvents c1, ScheduleEvents c2) {
                 if (c1.eventTime.after(c2.eventTime)) return 1;
                 if (c1.eventTime.before(c2.eventTime)) return -1;
                 return 0;
             }});
 
-            for(int i = 0; i < scheduleEvents.size(); i++)
+            for(int i = 0; i < InternalData.scheduleEvents.size(); i++)
             {
-                System.out.println(scheduleEvents.get(i).eventName);
+                System.out.println(InternalData.scheduleEvents.get(i).eventName);
             }
     }
 
@@ -125,24 +92,24 @@ public class MainActivity extends AppCompatActivity {
     {
         int tempIndex = -1;
         Date currentTime = Calendar.getInstance().getTime();
-        for(int i = 0; i < scheduleEvents.size(); i++)
+        for(int i = 0; i < InternalData.scheduleEvents.size(); i++)
         {
             //If the current time is after the time on the Schedule
-            if(currentTime.after(scheduleEvents.get(i).eventTime))
+            if(currentTime.after(InternalData.scheduleEvents.get(i).eventTime))
             {
-                System.out.println("The current time is after " + scheduleEvents.get(i).eventName + " at " + scheduleEvents.get(i).eventTime);
+                System.out.println("The current time is after " + InternalData.scheduleEvents.get(i).eventName + " at " + InternalData.scheduleEvents.get(i).eventTime);
                 //If the event at index: i is the not the last event on the schedule
-                if(i != scheduleEvents.size()-1)
+                if(i != InternalData.scheduleEvents.size()-1)
                 {
                     //If the current time is before the next event's time on the Schedule
-                   if(currentTime.before(scheduleEvents.get(i + 1).eventTime))
+                   if(currentTime.before(InternalData.scheduleEvents.get(i + 1).eventTime))
                    {
                        tempIndex = i;
                        break;
                    }
                    else
                    {
-                       System.out.println(currentTime + " is after " + scheduleEvents.get(i + 1).eventName + " at " + scheduleEvents.get(i + 1).eventTime);
+                       System.out.println(currentTime + " is after " + InternalData.scheduleEvents.get(i + 1).eventName + " at " + InternalData.scheduleEvents.get(i + 1).eventTime);
 
                    }
                 }
@@ -152,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             else {
-                System.out.println(currentTime + " is before " + scheduleEvents.get(i).eventName + " at " + scheduleEvents.get(i).eventTime);
+                System.out.println(currentTime + " is before " + InternalData.scheduleEvents.get(i).eventName + " at " + InternalData.scheduleEvents.get(i).eventTime);
             }
         }
         return tempIndex;
@@ -161,17 +128,17 @@ public class MainActivity extends AppCompatActivity {
     void ConvertScheduleToToday()
     {
         //Setting every scheduled Event day to be the current day
-        for(int i = 0; i < scheduleEvents.size(); i++)
+        for(int i = 0; i < InternalData.scheduleEvents.size(); i++)
         {
             Calendar cal = Calendar.getInstance();
             cal.setTimeZone(TimeZone.getDefault());
-            System.out.println("Hour before conversion: " + scheduleEvents.get(i).eventTime.getHours());
+            System.out.println("Hour before conversion: " + InternalData.scheduleEvents.get(i).eventTime.getHours());
             System.out.println("Calendar hour before conversion: " + cal.getTime().getHours());
-            cal.set(Calendar.HOUR, scheduleEvents.get(i).eventTime.getHours());
+            cal.set(Calendar.HOUR, InternalData.scheduleEvents.get(i).eventTime.getHours());
             System.out.println("Hour after conversion: " + cal.getTime().getHours());
-            cal.set(Calendar.MINUTE, scheduleEvents.get(i).eventTime.getMinutes());
-            cal.set(Calendar.SECOND, scheduleEvents.get(i).eventTime.getSeconds());
-            scheduleEvents.get(i).eventTime = cal.getTime();
+            cal.set(Calendar.MINUTE, InternalData.scheduleEvents.get(i).eventTime.getMinutes());
+            cal.set(Calendar.SECOND, InternalData.scheduleEvents.get(i).eventTime.getSeconds());
+            InternalData.scheduleEvents.get(i).eventTime = cal.getTime();
         }
     }
     // TODO: Display a pop up that it's time to start transitioning to the next activity
@@ -182,8 +149,8 @@ public class MainActivity extends AppCompatActivity {
     Date GetTimeForNextTransition(int index)
     {
         Date transitionReturn;
-        transitionReturn = scheduleEvents.get(index).eventTime;
-        transitionReturn.setTime(transitionReturn.getTime() - (scheduleEvents.get(index).timeForReminder * 60 * 1000 /*Converts the time to milliseconds*/));
+        transitionReturn = InternalData.scheduleEvents.get(index).eventTime;
+        transitionReturn.setTime(transitionReturn.getTime() - (InternalData.scheduleEvents.get(index).timeForReminder * 60 * 1000 /*Converts the time to milliseconds*/));
         System.out.println("Transition time is " + transitionReturn);
         return transitionReturn;
     }
@@ -195,9 +162,9 @@ public class MainActivity extends AppCompatActivity {
         currentIndex = FindPlaceInSchedule();
         System.out.println(currentIndex);
         final Calendar temp = Calendar.getInstance();
-        System.out.println(scheduleEvents.get(0).eventName + " is at " + scheduleEvents.get(0).eventTime.toString());
+        System.out.println(InternalData.scheduleEvents.get(0).eventName + " is at " + InternalData.scheduleEvents.get(0).eventTime.toString());
         System.out.println("The current date and time is " + temp.getTime());
-        nextIndex = (currentIndex != scheduleEvents.size() - 1)? currentIndex + 1 : 0;
+        nextIndex = (currentIndex != InternalData.scheduleEvents.size() - 1)? currentIndex + 1 : 0;
         transition = GetTimeForNextTransition(nextIndex);
 
         handler.postDelayed(new Runnable() {
@@ -211,19 +178,19 @@ public class MainActivity extends AppCompatActivity {
                 if(currentIndex == -1)
                     current.setText("No Current Activity");
                 else
-                    current.setText("Current Activity; " + scheduleEvents.get(currentIndex).eventName);
+                    current.setText("Current Activity; " + InternalData.scheduleEvents.get(currentIndex).eventName);
                 TextView next = findViewById(R.id.nextActivity);
                 SimpleDateFormat transitionFormatted = new SimpleDateFormat("hh:mm a");
                 String transitionString = "";
                 transitionString = transitionFormatted.format(transition);
-                next.setText("Next Activity: " + scheduleEvents.get(nextIndex).eventName + "(" + transitionString + ")");
+                next.setText("Next Activity: " + InternalData.scheduleEvents.get(nextIndex).eventName + "(" + transitionString + ")");
                 TextView debugView = findViewById(R.id.debugView);
                 debugView.setText("Current time is " + ((transition.getTime() - thisSecond.getTime().getTime())) + " seconds away");
                 if(thisSecond.after(transition))
                 {
                     NotifyOfTransition();
-                    currentIndex = (currentIndex + 1 == scheduleEvents.size())? 0:currentIndex +1;
-                    nextIndex = (currentIndex + 1 == scheduleEvents.size()) ? 0: currentIndex +1;
+                    currentIndex = (currentIndex + 1 == InternalData.scheduleEvents.size())? 0:currentIndex +1;
+                    nextIndex = (currentIndex + 1 == InternalData.scheduleEvents.size()) ? 0: currentIndex +1;
                     transition = GetTimeForNextTransition(nextIndex);
                 }
 
@@ -245,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(this, extraCountInformation.class);
         Bundle args = new Bundle();
-        args.putSerializable("ARRAY", campers);
+        args.putSerializable("ARRAY", InternalData.campers);
         intent.putExtra("BUNDLE", args);
         intent.putExtra("RosterType", extraCountInformation.RosterType.Group1);
         startActivity(intent);
@@ -255,12 +222,15 @@ public class MainActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(this, extraCountInformation.class);
         Bundle args = new Bundle();
-        args.putSerializable("ARRAY", campers);
+        args.putSerializable("ARRAY", InternalData.campers);
         intent.putExtra("BUNDLE", args);
         intent.putExtra("RosterType", extraCountInformation.RosterType.Group2);
         startActivity(intent);
     }
 
 
-
+    public void viewSchedule(View view) {
+        Intent intent = new Intent(this, ScheduleDisplay.class);
+        startActivity(intent);
+    }
 }
