@@ -7,9 +7,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_gravity="start"
         android:gravity="center"
-        android:padding="20dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
         android:text="Instruction Time"
         android:textAlignment="center"
         android:textSize="34dp" />
@@ -17,15 +20,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:gravity="center_horizontal"
+        android:layout_gravity="start"
+        android:gravity="left"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="20dp"
+            android:padding="10dp"
             android:text="12:30"
             android:textAlignment="center"
             android:textSize="20dp" />
@@ -33,14 +36,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="20dp"
+            android:padding="10dp"
             android:text="Barry Lounge"
             android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="20dp"
+            android:padding="10dp"
             android:text="15 Min"
             android:textSize="20dp" />
 

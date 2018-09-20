@@ -7,6 +7,7 @@ public class ScheduleEvents{
     public String eventName;
     public int timeForReminder;
     public String eventLocation;
+    public String eventDetails;
 
 
 
@@ -16,6 +17,7 @@ public class ScheduleEvents{
         eventName = name;
         timeForReminder = reminder;
         eventLocation = location;
+        eventDetails = "";
     }
 
 

@@ -3,6 +3,7 @@ package com.example.roc06.staffciao;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -33,7 +34,19 @@ public class ScheduleDisplay extends AppCompatActivity {
             tempView.setText(event.eventLocation);
             tempView = (TextView) temp.getChildAt(2);
             String timeForReminder = String.valueOf(event.timeForReminder);
-            tempView.setText(timeForReminder);
+            tempView.setText(timeForReminder + " Min");
+
+            View divider = (View) LayoutInflater.from(this).inflate(R.layout.layout_horizontal_line, null);
+            linearLayout.addView(divider);
         }
     }
+
+    void startEventEditor(View view){
+        int eventIndex = ((LinearLayout)view.getParent()).indexOfChild(view) / 2;
+        ScheduleEvents event =
+
+
+
+    }
+
 }

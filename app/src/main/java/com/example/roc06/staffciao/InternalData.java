@@ -37,6 +37,9 @@ public class InternalData {
             scheduleEvents.add(temp);
             temp = new ScheduleEvents(tempCal.getTime(), "Instructional Time", 10, "HVC 202");
             scheduleEvents.add((temp));
+            tempCal.set(0,0,0,13, 15, 0);
+            temp = new ScheduleEvents(tempCal.getTime(), "Activity Time", 15, "Courtyard");
+            scheduleEvents.add(temp);
         }
     }
 
