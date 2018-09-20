@@ -26,7 +26,7 @@ public class ScheduleDisplay extends AppCompatActivity {
             tempView.setText(event.eventName);
             temp = (LinearLayout) temp.getChildAt(1);
             tempView = (TextView) temp.getChildAt(0);
-            DateFormat df = new SimpleDateFormat("HH:mm a");
+            DateFormat df = new SimpleDateFormat("hh:mm a");
             String date = df.format(event.eventTime);
             tempView.setText(date);
             tempView = (TextView) temp.getChildAt(1);
