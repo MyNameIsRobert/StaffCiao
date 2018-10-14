@@ -75,6 +75,13 @@ public class MainActivity extends AppCompatActivity {
         InternalData.StoreAllData();
     }
 
+    public void searchButton(View view)
+    {
+        Intent intent = new Intent(MainActivity.this, camperSearch.class);
+        startActivity(intent);
+    }
+
+
     void SortSchedule()
     {        Collections.sort(InternalData.scheduleEvents, new Comparator<ScheduleEvents>() {
             public int compare(ScheduleEvents c1, ScheduleEvents c2) {

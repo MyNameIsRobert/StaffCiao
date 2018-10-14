@@ -45,5 +45,7 @@ public class camperDisplay extends AppCompatActivity {
             numberView.setText(camper.guardianContactNumbers[i]);
         }
 
+        System.out.println("Search triggers on " + camper.getName() + ":" + camper._searchResults_TermHit);
+
     }
 }

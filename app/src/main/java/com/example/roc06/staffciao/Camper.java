@@ -1,10 +1,12 @@
 package com.example.roc06.staffciao;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Random;
 
-public class Camper implements Serializable
+public class Camper implements Serializable, Comparable<Camper>
 {
     public String camperName;
     public int age;
@@ -18,7 +20,7 @@ public class Camper implements Serializable
     public boolean prefersNickname = false;
     public String[] guardianNames, guardianContactNumbers;
     public String safeWord;
-
+    public String _searchResults_TermHit;
     public class MedicalInformation
     {
         public String medicationInfo;
@@ -48,6 +50,7 @@ public class Camper implements Serializable
         baggedLunch = false;
         isOvernight = true;
         maleOrFemale = 'M';
+        _searchResults_TermHit = "";
     }
 
     public Camper(String name, int a, String cName, String nickName, MedicalInformation[] medInfo, String tShirt, boolean bag, boolean over, char mOrF)
@@ -66,6 +69,20 @@ public class Camper implements Serializable
         }
         maleOrFemale = mOrF;
     }
+
+    public  int compareTo(Camper x)
+    {
+        return getName().compareTo(x.getName());
+    }
+
+
+    public static Camper[] sort(Camper[] start)
+    {
+        Arrays.sort(start);
+
+        return start;
+    }
+
 
     public void RandomizeCamper()
     {

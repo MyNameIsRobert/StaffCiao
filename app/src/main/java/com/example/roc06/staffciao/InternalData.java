@@ -85,4 +85,63 @@ public class InternalData {
         }
     }
 
+    public static Camper[] SearchCampers(String keyWord)
+    {
+        ArrayList<Camper> tempList = new ArrayList<>();
+        keyWord = keyWord.toLowerCase();
+        //Loops through all campers
+        for(int i = 0; i < campers.size(); i++)
+        {
+            Camper temp = campers.get(i);
+            temp._searchResults_TermHit = "";
+            //Name - Calls the Camper function getName() to include nicknames in search
+            if(temp.getName().toLowerCase().contains(keyWord))
+            {
+                temp._searchResults_TermHit += "n";
+                tempList.add(temp);
+            }
+            // Course Name
+            if(temp.courseName.toLowerCase().contains(keyWord))
+            {
+                temp._searchResults_TermHit += "c";
+                tempList.add(temp);
+            }
+            // Age- checks to see if the keyword contains numbers, if it does, it extracts only the numbers in the string,
+            // then checks to see if they are the same as the campers age
+            if(keyWord.matches(".*\\d+.*") && temp.age == Integer.parseInt(keyWord.replaceAll("[^0-9]", "")))
+            {
+                temp._searchResults_TermHit += "a";
+                tempList.add(temp);
+            }
+            // T-Shirt size -
+            if(temp.tShirtSize.toLowerCase().contains(keyWord))
+            {
+                temp._searchResults_TermHit += "t";
+                tempList.add(temp);
+            }
+        }
+
+        Camper[] returnList = tempList.toArray(new Camper[tempList.size()]);
+
+        returnList = Camper.sort(returnList);
+
+        return  returnList;
+    }
+    /// <summary>
+    /// Searches for campers that fit the keyword within the given parameters in advanced tools.
+    /// Usable parameters are: n(N) for name, i(I) for instructor, c(C) for class/course, a(A) for
+    /// age, t(T) for t-shirt size, g(G) or p(P) for guardian names. Note that this function takes
+    /// a string for the second parameter, so you can combine letters, and they will be searched in
+    /// order that they were given. I.e. "inC" would first return all the campers that have an instructor
+    /// that matches the keyword, then all campers that have that name, then all campers with a class
+    /// that matches the keyword, making sure not to duplicate.
+    /// </summary>
+    public static Camper[] SearchCampers(String keyWord, String advancedTools)
+    {
+
+        return null;
+    }
+
+
+
 }

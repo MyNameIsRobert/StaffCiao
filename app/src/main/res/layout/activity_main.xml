@@ -43,31 +43,31 @@
                 <TextClock
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:onClick="viewSchedule"
                     android:text="4:10"
                     android:textAlignment="center"
                     android:textColor="?attr/colorPrimary"
-                    android:textSize="40sp"
-                    android:onClick="viewSchedule"/>
+                    android:textSize="40sp" />
 
                 <TextView
                     android:id="@+id/currentActivity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:onClick="viewSchedule"
                     android:text="Current Activity: Lunch"
                     android:textAlignment="center"
                     android:textColor="?attr/colorPrimary"
-                    android:textSize="22sp"
-                    android:onClick="viewSchedule"/>
+                    android:textSize="22sp" />
 
                 <TextView
                     android:id="@+id/nextActivity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:onClick="viewSchedule"
                     android:text="Next Activity: Instructional Time (12:30)"
                     android:textAlignment="center"
                     android:textColor="?attr/colorPrimary"
-                    android:textSize="22sp"
-                    android:onClick="viewSchedule"/>
+                    android:textSize="22sp" />
 
                 <TextView
                     android:id="@+id/debugView"
@@ -186,6 +186,32 @@
                         android:textSize="20sp" />
                 </LinearLayout>
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="203dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.51"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <ImageButton
+                    android:id="@+id/customButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:srcCompat="@mipmap/ic_launcher" />
+
+                <ImageButton
+                    android:id="@+id/searchButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:srcCompat="@android:drawable/ic_menu_search"
+                    android:onClick="searchButton"/>
             </LinearLayout>
 
         </LinearLayout>
